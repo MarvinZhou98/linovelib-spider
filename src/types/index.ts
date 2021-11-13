@@ -13,3 +13,8 @@ export interface PageBaseInfo {
     page: string;
     chaptername: string;
 }
+
+export interface FormatData {
+    baseInfo: PageBaseInfo;
+    context: string[];
+}

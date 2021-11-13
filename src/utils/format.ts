@@ -1,4 +1,4 @@
-import { PageBaseInfo } from '../types';
+import { FormatData, PageBaseInfo } from '../types';
 
 const getTargetFromInfoStr = (target: string, infoStr: string) => {
     const regexp = RegExp(`${target}:'.*?',`);
@@ -36,10 +36,10 @@ const getPageBaseInfo = (html: string): PageBaseInfo => {
     return baseInfo;
 };
 
-export const formatHtml = async (html: string) => {
+export const formatHtml = async (html: string): Promise<FormatData> => {
     const baseInfo = getPageBaseInfo(html);
     return {
         baseInfo: baseInfo,
-        newHtml: html,
+        context: [],
     };
 };

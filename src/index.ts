@@ -2,8 +2,8 @@ import { downloadHtml, formatHtml, getUrl, saveAsFile } from './utils';
 
 const main = async () => {
     const html = await downloadHtml(getUrl(2013, 72034));
-    const { baseInfo, newHtml } = await formatHtml(html);
-    saveAsFile('body', newHtml, baseInfo);
+    const formatData = await formatHtml(html);
+    saveAsFile('body', html, formatData);
     console.log('success');
 };
 

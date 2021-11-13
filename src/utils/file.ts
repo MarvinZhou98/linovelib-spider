@@ -1,10 +1,10 @@
 import fs from 'fs';
-import { PageBaseInfo } from '../types';
+import { FormatData } from '../types';
 
 export const saveAsFile = (
     filename: string,
     context: string,
-    info: PageBaseInfo
+    formatData: FormatData
 ) => {
     fs.writeFile(
         `${process.cwd()}/out/${filename}.txt`,
@@ -18,7 +18,7 @@ export const saveAsFile = (
     );
     fs.writeFile(
         `${process.cwd()}/out/${filename}.json`,
-        JSON.stringify(info, null, 2),
+        JSON.stringify(formatData, null, 2),
         { flag: 'w' },
         (err) => {
             if (err) {
