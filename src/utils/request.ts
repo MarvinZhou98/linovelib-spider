@@ -1,13 +1,17 @@
 import request from 'request';
 
-export const getUrl = (year: number, index: number, suffix?: number) =>
-    `https://w.linovelib.com/novel/${year}/${index}${suffix ? '_' : ''}${
+const Host = 'https://w.linovelib.com/novel';
+
+export const getUrl = (bookIndex: number, index: number, suffix?: number) =>
+    `${Host}/${bookIndex}/${index}${suffix ? '_' : ''}${
         suffix ? suffix : ''
     }.html`;
 
-export const downloadHtml = (year: number, index: number, suffix?: number) => {
+export const getNextPageUrl = (url_next: string) => `${Host}${url_next}`;
+
+export const downloadHtml = (url: string) => {
     return new Promise<string>((resove, reject) => {
-        request(getUrl(year, index, suffix), (error, res, body) => {
+        request(url, (error, res, body) => {
             if (error) {
                 reject('获取数据失败');
             }

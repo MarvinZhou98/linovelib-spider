@@ -1,8 +1,10 @@
-import { downloadHtml, saveAsFile } from './utils';
+import { downloadHtml, formatHtml, getUrl, saveAsFile } from './utils';
 
 const main = async () => {
-    const html = await downloadHtml(2013, 72034);
-    saveAsFile('body', html);
+    const html = await downloadHtml(getUrl(2013, 72034));
+    const { baseInfo, newHtml } = await formatHtml(html);
+    saveAsFile('body', newHtml, baseInfo);
+    console.log('success');
 };
 
 export default main;
