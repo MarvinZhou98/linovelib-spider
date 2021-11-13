@@ -14,6 +14,7 @@ export const downloadHtml = (url: string) => {
         request(url, (error, res, body) => {
             if (error) {
                 reject('获取数据失败');
+                return;
             }
             if (res.statusCode === 200 && typeof body === 'string') {
                 resove(body);

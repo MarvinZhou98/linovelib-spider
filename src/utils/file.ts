@@ -27,3 +27,14 @@ export const saveAsFile = (
         }
     );
 };
+
+export const getHtmlFromFile = (filename: string) =>
+    new Promise<string>((resove, reject) => {
+        fs.readFile(`${process.cwd()}/out/${filename}.txt`, (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resove(data.toString());
+        });
+    });
