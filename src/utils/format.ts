@@ -1,3 +1,5 @@
+import cheerio from 'cheerio';
+
 import { FormatData, PageBaseInfo } from '../types';
 
 const getTargetFromInfoStr = (target: string, infoStr: string) => {
@@ -36,10 +38,23 @@ const getPageBaseInfo = (html: string): PageBaseInfo => {
     return baseInfo;
 };
 
+const getContext = (html: string): string[] => {
+    const $ = cheerio.load(html);
+    const acontent = $('#acontent').first();
+    const children = acontent
+        .contents()
+        .map((i, el) => $(el).text())
+        .toArray()
+        .filter((item) => !!item && !item.startsWith('\n'))
+        .map((item) => item.replace('\n', ''));
+    return children;
+};
+
 export const formatHtml = async (html: string): Promise<FormatData> => {
     const baseInfo = getPageBaseInfo(html);
+    const context = getContext(html);
     return {
-        baseInfo: baseInfo,
-        context: [],
+        baseInfo,
+        context,
     };
 };
